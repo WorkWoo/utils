@@ -10,10 +10,10 @@ config.mongo.keepAlive = 120; //milliseconds
 
 //mailer
 config.mailer = {};
-config.mailer.user = 'quikpaper.mailer@gmail.com';
-config.mailer.pass = 'w3c@n7b3s70pp3d1';
-config.mailer.from = 'QuikPaper <quikpaper.mailer@gmail.com>';
-config.mailer.replyTo = 'QuikPaper <quikpaper.mailer@gmail.com>';
+config.mailer.user = 'support@workwoo.com';
+config.mailer.pass = 'w3c@n7b3s70pp3d.*1';
+config.mailer.from = 'WorkWoo <support@workwoo.com>';
+config.mailer.replyTo = 'WorkWoo <support@workwoo.com>';
 
 // Cache
 config.cache = {};
