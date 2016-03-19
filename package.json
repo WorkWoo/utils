@@ -11,8 +11,7 @@
     "node-cache": "3.0.1",
     "nodemailer": "2.0.0",
     "nodemailer-smtp-transport": "2.0.0",
-    "mongoose": "4.3.6",
-    "xoauth2": "1.1.0"
+    "mongoose": "4.3.6"
   },
   "author": "Ryan Mangroo",
   "license": "ISC"

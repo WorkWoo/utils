@@ -26,9 +26,7 @@ config.mongoose.options = { versionKey: '_version', timestamps: { createdAt: 'cr
 //mailer
 config.mailer = {};
 config.mailer.user = 'support@workwoo.com';
-config.mailer.pass = 'w3c@n7b3s70pp3d.*1';
-config.mailer.clientId = '24713075299-v2h198fglhqosbbefs81hqj6at46dkrb.apps.googleusercontent.com';
-config.mailer.secret = 'Quo2ZcZenVqtgKeOD_t2KCNq';
+config.mailer.pass = 'cmncvjbyqefmsdtn';
 config.mailer.from = 'WorkWoo <support@workwoo.com>';
 config.mailer.replyTo = 'WorkWoo <support@workwoo.com>';
 config.mailer.tokenPlaceholder = '|TOKEN|';
