@@ -1,18 +1,19 @@
 // Config
 var cfg = require('../config/config');
 
+var utility = require('../lib/utility');
+
 var request = require('request');
 var j = request.jar();
 var btoa = require('btoa');
 
-var numTests = 1;
-var executedTests = 0;
+var testFinished = false;
 
 run();
 
 function end() {
 	setTimeout(function() { 
-		if (numTests == executedTests) { 
+		if (testFinished) { 
 			process.exit();
 		} else {
 			end();
@@ -21,40 +22,137 @@ function end() {
 }
 
 function run() {
-	var emailAddress = process.argv.length > 2 && process.argv[2] ? process.argv[2] : 'rmangroo@gmail.com';
-	var password = process.argv.length > 3 && process.argv[3] ? process.argv[3] : '123456';
+	if (process.argv.length < 3) {
+		console.log('Test Type required: node endPointTester.js [Test Type] [Test Arguments]');
+		process.exit();
+	} else {
+		var testType = process.argv[2];
+
+		switch (testType) {
+			case 'auth' : testAuthentication(); break;
+			case 'fp' : testForgotPassword(); break;
+			case 'rp' : testResetPassword(); break;
+			default : console.log('Invalid test type: ' + testType); process.exit();break;
+		}
+
+		end();
+	}
+
+}
+
+function testAuthentication() {
+	if (process.argv.length < 5) {
+		console.log('Email Address and Password required: node endPointTester.js auth [emailAddress] [password]');
+		process.exit();
+	}
+
+	var emailAddress = process.argv[3];
+	var password = process.argv[4];
 
 	console.log("Logging in with " + emailAddress + ":" + password);
 
 	logIn(emailAddress, password);
-	end();
 }
 
-function logIn(username, password) {
+function logIn(emailAddress, password) {
 	request({
 		url: cfg.auth.url + "/login",
 		method: "POST",
 		withCredentials: true,
 		headers: {
-			Authorization: 'Basic ' + btoa(username + ":" + password),
+			Authorization: 'Basic ' + btoa(emailAddress + ":" + password),
 		},
 		jar: j
 	}, function(error, response, body) {
 		console.log("Response to logIn: " + body);
 		var cookie_string = j.getCookieString(cfg.auth.url + '/login'); 
-		console.log(cookie_string);
-		executedTests++;
+		if (cookie_string) {
+			console.log(cookie_string);
+			console.log("Logging out with " + emailAddress + ":" + password);
+			logOut();	
+		} else {
+			testFinished = true;
+		}
+		
 	});
 }
 
 function logOut() {
 	request({
-		url: cfg.platform.url + "/logout",
+		url: cfg.platform.url + "logout",
 		method: "GET",
 		withCredentials: true,
 		jar: j
 	}, function(error, response, body) {
-		console.log("Response to logout: " + body);
+		//console.log("Response to logout: " + body);
 		process.exit();
+		testFinished = true;
 	});
 }
+
+function testForgotPassword() {
+	if (process.argv.length < 4) {
+		console.log('Email Address required: node endPointTester.js fp [emailAddress]');
+		process.exit();
+	}
+
+	var emailAddress = process.argv[3];
+
+	console.log("Executing forgot password with " + emailAddress);
+
+	forgotPassword(emailAddress);
+}
+
+function forgotPassword(emailAddress) {
+	var data = {};
+	data.emailAddress = emailAddress;
+
+	request({
+		url: cfg.auth.url + "/forgotPwd",
+		method: "POST",
+		json: true,
+		body: data,
+		withCredentials: true,
+		jar: j
+	}, function(error, response, body) {
+		console.log("Response to forgot password: ");
+		utility.logObject(body);
+		console.log("Check your email for token if successful");
+		testFinished = true;
+	});
+}
+
+function testResetPassword() {
+	if (process.argv.length < 5) {
+		console.log('New password and token required: node endPointTester.js fp [new password] [token]');
+		process.exit();
+	}
+
+	var newPassword = process.argv[3];
+	var token = process.argv[4];
+
+	console.log("Executing reset password with " + newPassword + ":" + token);
+
+	resetPassword(newPassword, token);
+}
+
+function resetPassword(newPassword, token) {
+	var data = {};
+	data.newPassword = newPassword;
+	data.token = token;
+
+	request({
+		url: cfg.auth.url + "/resetPwd",
+		method: "POST",
+		json: true,
+		body: data,
+		withCredentials: true,
+		jar: j
+	}, function(error, response, body) {
+		console.log("Response to reset password: " + body);
+		utility.logObject(body);
+		testFinished = true;
+	});
+}
+
+
