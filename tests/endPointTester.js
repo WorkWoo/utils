@@ -163,13 +163,14 @@ function updateMyAccount(emailAddress) {
 	
 	var data = {};
 	data.user = {};
-	data.user.firstName = 'endPoint';
-	data.user.lastName = 'Tester';
-	data.user.phone = '(111)-123-4567';
+	data.user.firstName = 'endPoint6';
+	data.user.lastName = '';
+	data.user.emailAddress = 'rmangroo@gmail.com';
+	data.user.phone = '(646) 573-6729';
 
 	data.org = {};
 	data.org.name = 'endPointTester Corp.';
-	data.org.phone = '(111)-123-4567';
+	data.org.phone = '1 800-573-6729';
 
 	request({
 		url: cfg.platform.url + "updateMyAccount",
