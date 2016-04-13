@@ -166,7 +166,7 @@ function updateMyAccount(emailAddress) {
 	data.user.firstName = 'endPoint';
 	data.user.lastName = 'Tester';
 	data.user.emailAddress = 'rmangroo@gmail.com';
-	data.user.phone = '6465736729';
+	data.user.phone = '4407400123456';
 
 	data.org = {};
 	data.org.name = 'endPointTester Corp.';
