@@ -2,7 +2,7 @@
 var cfg = require('../config/config');
 
 var utility = require('../lib/utility');
-
+var validator = require('../lib/validator');
 var request = require('request');
 var j = request.jar();
 var btoa = require('btoa');
