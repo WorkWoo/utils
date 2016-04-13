@@ -12,7 +12,8 @@
     "nodemailer": "2.0.0",
     "nodemailer-smtp-transport": "2.0.0",
     "mongoose": "4.3.6",
-    "validator": "5.2.0"
+    "validator": "5.2.0",
+    "google-libphonenumber": "1.0.17"
   },
   "author": "Ryan Mangroo",
   "license": "ISC"
