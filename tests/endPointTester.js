@@ -113,7 +113,7 @@ function forgotPassword(emailAddress, callback) {
 
 function testResetPassword() {
 	if (process.argv.length < 5) {
-		console.log('New password and token required: node endPointTester.js fp [new password] [token]');
+		console.log('New password and token required: node endPointTester.js rp [new password] [token]');
 		process.exit();
 	}
 
