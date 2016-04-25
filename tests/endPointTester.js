@@ -51,6 +51,8 @@ function testAll() {
 
 	callStack.push( function () { logIn(emailAddress, password) } );
 	callStack.push( function () { getUserProfile(emailAddress); } );
+	callStack.push( function () { updateMyAccount(emailAddress); } );
+	callStack.push( function () { changePassword(emailAddress, password, '3ndP01n7!'); } );
 	callStack.push( function () { logOut(emailAddress); } );	
 	next();
 }
