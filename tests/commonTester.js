@@ -1,4 +1,4 @@
-var fieldTypes = require('../lib/fieldType').getFieldTypes();
+var fieldTypes = require('../lib/fieldType').getFieldTypesObject();
 
 
 for (var prop in fieldTypes) {
