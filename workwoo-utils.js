@@ -4,8 +4,6 @@ exports.logger = require('./lib/logger');
 exports.mailer = require('./lib/mailer');
 exports.utility = require('./lib/utility');
 exports.validator = require('./lib/validator');
-exports.fieldType = require('./lib/fieldType');
-exports.collectionType = require('./lib/collectionType');
 
 //Common Models
 exports.notificationTemplate = require('./lib/models/notificationTemplate');
