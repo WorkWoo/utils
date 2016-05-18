@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bunyan": "1.5.1",
+    "bcrypt": "0.8.5",
     "node-cache": "3.0.1",
     "nodemailer": "2.0.0",
     "nodemailer-smtp-transport": "2.0.0",
